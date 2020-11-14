@@ -19,5 +19,6 @@ Route::get('/', function () {
 });
 
 Route::get('/index',[Controller::class, 'index']);
+Route::get('/',[Controller::class, 'index']);
 Route::post('/voice',[Controller::class, 'voice']);
 Route::post('/token',[Controller::class, 'token']);

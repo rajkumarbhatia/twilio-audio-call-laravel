@@ -10,7 +10,6 @@ use Twilio\Rest\Client;
 use Twilio\Jwt\AccessToken;
 use Twilio\Jwt\Grants\VoiceGrant;
 use Twilio\TwiML\VoiceResponse;
-use Twilio\TwiML\Services_Twilio_Twiml;
 use Illuminate\Http\Request;
 use Twilio\Jwt\ClientToken;
 
@@ -53,13 +52,11 @@ class Controller extends BaseController
 		// Add grant to token
 		$token->addGrant($voiceGrant);
 
-		// render token to string
-		// echo $token->toJWT();
-
 		return response()->json([
 			"identity" => $data['identity'],
 			"token" => $token->toJWT() 
 		]);
+
 
     }
 
@@ -67,8 +64,17 @@ class Controller extends BaseController
 
     	$data = $request->all();
     	$response = new VoiceResponse();
+
+    	// make sure you passing caller id from client side. 
+    	// Twilio.Device.connect(params); <----- in param object
 		$dial = $response->dial('', ['callerId' => $data["outgoing_caller_id"]]);
-		$dial->client($request->To);
+		$client = $dial->client($request->To);
+
+		// Sending custom parameters, We will use in client side 
+		$client->parameter([
+            "name" => "outgoing_caller_id",
+            "value" => $data["outgoing_caller_id"],
+        ]);
 
 		return $response;
 
