@@ -1,7 +1,7 @@
 ﻿$(function () {
 
 
-    var ajaxURL = window.location.protocol+"//"+window.location.hostname+"/"+"AudioApp/";
+   var ajaxURL = window.location.protocol+"//"+window.location.hostname+"/"+"twilio-audio-call-laravel/";
 
   var speakerDevices = document.getElementById('speaker-devices');
   var ringtoneDevices = document.getElementById('ringtone-devices');
