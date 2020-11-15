@@ -8,7 +8,7 @@
     var volumeIndicators = document.getElementById('volume-indicators');
 
     log('Requesting Capability Token...');
-    var identity = prompt("Please enter your name", "Jack");
+    var identity = prompt("Please enter your name", "Jack"); // Geting name of Client
 
     document.getElementById('button-call').onclick = function () {
     // get the phone number to connect the call to
@@ -22,10 +22,10 @@
     };
 
   
-    window.onload = function () {
+    window.onload = function () { // We will get token on load.
         // get the Client name to connect the call to
     
-        if(identity){
+        if(identity){ // identity is a client name.
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -33,7 +33,7 @@
             });
 
             $.ajax({
-                url : ajaxURL+"token",
+                url : ajaxURL+"token", // route
                 type : "post",
                 dataType : "json",
                 data : {
@@ -75,6 +75,7 @@
                         log('Incoming connection from ' + conn.parameters.From);
                         console.log(conn);
                         
+                        // i passed custom param and get through loop
                         conn.customParameters.forEach((val,key) => {
                             if(key == "outgoing_caller_id"){ // calling by. 
                                 // We will show name on Popup :
@@ -86,7 +87,7 @@
 
                         var archEnemyPhoneNumber = '+12099517118';
                         // console.log();
-                        $( "#dialog-confirm" ).dialog({
+                        $( "#dialog-confirm" ).dialog({ //jQuery dialog box
                             resizable: false,
                             height: "auto",
                             width: 400,
@@ -105,7 +106,7 @@
                         });
                     });
 
-                    setClientNameUI(data.identity);
+                    setClientNameUI(data.identity); //print name
 
                     Twilio.Device.audio.on('deviceChange', updateAllDevices);
 

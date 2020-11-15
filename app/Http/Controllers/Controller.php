@@ -31,7 +31,7 @@ class Controller extends BaseController
 		// Required for Voice grant
 		$outgoingApplicationSid = env("TWILIO_SID");
 		// An identifier for your app - can be anything you'd like
-		$identity = $data["identity"];
+		$identity = $data["identity"]; // Jack // Client name
 
 		// Create access token, which we will serialize and send to the client
 		$token = new AccessToken(
